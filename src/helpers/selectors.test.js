@@ -68,20 +68,6 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
   expect(result.length).toEqual(0);
 });
 
-export function getInterviewersForDay(state, day) {
-  const result = [];
-  state.days.forEach(data => {
-    if (data.name === day) {
-      data.interviewers.forEach(id => {
-        if ( state.interviewers[id]) {
-          result.push(state.interviewers[id])
-        };
-      });
-    };
-  });
-  return result;
-};
-
 test("getInterview returns an object with the interviewer data", () => {
   const result = getInterview(state, state.appointments["3"].interview);
   expect(result).toEqual(

@@ -25,16 +25,31 @@ export function getInterview(state, interview) {
   return {...interview, interviewer};
 };
 
+// export function getInterviewersForDay(state, day) {
+//   const result = [];
+//   state.days.forEach(data => {
+//     if (data.name === day) {
+//       data.interviewers.forEach(id => {
+//         if ( state.interviewers[id]) {
+//           result.push(state.interviewers[id])
+//         };
+//       });
+//     };
+//   });
+//   return result;
+// };
+
 export function getInterviewersForDay(state, day) {
-  const result = [];
-  state.days.forEach(data => {
-    if (data.name === day) {
-      data.interviewers.forEach(id => {
-        if ( state.interviewers[id]) {
-          result.push(state.interviewers[id])
-        };
-      });
-    };
-  });
-  return result;
-};
+  let array = state.days
+  let app=[];
+  let result = [];
+  for (const i of array) {
+    if (i.name === day) {
+      app = i.interviewers;
+    }
+  }
+  for (const id of app) {
+    result.push(state.interviewers[id])
+  }
+   return result
+}
