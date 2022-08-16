@@ -53,13 +53,13 @@ export default function Appointment(props) {
         time={props.time}
       />
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
-      {mode === SAVING && <Status message={props.message} />}
+      {mode === SAVING && <Status message="Saving" />}
       {mode === SHOW && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onEdit={props.onEdit}
-          onDelete={deleteInterview}
+          onEdit={(props.onEdit)}
+          onDelete={()=> transition(CONFIRM)}
         />
       )}
       {mode === CREATE && (
@@ -69,6 +69,14 @@ export default function Appointment(props) {
         onCancel={()=>back(EMPTY)}
         />
       )}
+      {mode === DELETING && <Status message="Deleting" />}
+      {mode === CONFIRM &&
+        <Confirm
+          message={props.message}
+          onCancel={()=>{back(SHOW)}}
+          onConfirm={()=>deleteInterview()}
+        />
+      }
     </article>
   );
 }
