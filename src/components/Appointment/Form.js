@@ -5,22 +5,18 @@ import React, { useState } from 'react';
 
 export default function Form(props) {
 
-  console.log('FORM: Interviewers', props.interviewers)
+  const [name, setName] = useState(props.name || "");
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+
   const reset = function (params) {
     setName("");
     setInterviewer(null);
   }
 
-  const cancel = function (params) {
+  const cancel = function () {
     reset()
     props.onCancel()
   }
-
-  const save = function (params) {
-    props.onSave(name, interviewer)
-  }
-  const [name, setName] = useState(props.name || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
 
   return(
     <main className="appointment__card appointment__card--create">
@@ -43,7 +39,7 @@ export default function Form(props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={cancel}>?Cancel</Button>
+          <Button danger onClick={ cancel }>Cancel?</Button>
           <Button confirm onClick={() => props.onSave(name, interviewer)}>Save</Button>
         </section>
       </section>

@@ -13,6 +13,8 @@ export default function Application(props) {
     interviewers:{}
   });
 
+  console.log('state.appointments', state.appointments)
+
   function bookInterview(id, interview) {
     console.log('bookInterview', id, interview);
     const appointment = {
