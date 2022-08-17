@@ -34,7 +34,8 @@ export default function Application(props) {
         cancelInterview={cancelInterview}
       />
     );
-  });
+  }).concat((<Appointment key="last" time="5pm" />
+  ));
 
   return (
     <main className="layout">
