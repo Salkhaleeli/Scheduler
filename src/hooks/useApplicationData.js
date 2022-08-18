@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData(props) {
-
   const [state, setState] = useState({
     day: "Monday",
     days: [],
     appointments: {},
     interviewers: {}
   });
-
 
   function bookInterview(id, interview) {
     const appointment = {
@@ -25,9 +23,6 @@ export default function useApplicationData(props) {
     return axios
       .put(`/api/appointments/${id}`, { interview })
       .then(() => {
-
-        console.log("appointments, days: ", appointments, days)
-
         setState({
           ...state,
           appointments,
@@ -60,19 +55,16 @@ export default function useApplicationData(props) {
 
   const setDay = day => setState({ ...state, day });
 
-  const remainSpots = function(appointments, state) {
+  const remainSpots = function (appointments, state) {
     let days = [...state.days];
     state.days.forEach(day => {
       let spot = 0;
-      day.appointments.forEach( id => appointments[id].interview && spot ++ );
+      day.appointments.forEach(id => appointments[id].interview && spot++);
 
       days[day.id - 1].spots = 5 - spot;
-
-      console.log(`${day.name}: ${5 - spot} spots left.`);
     })
     return days;
   };
-
 
   useEffect(() => {
     Promise.all([
@@ -96,7 +88,4 @@ export default function useApplicationData(props) {
     bookInterview,
     cancelInterview
   }
-
-
-
 }

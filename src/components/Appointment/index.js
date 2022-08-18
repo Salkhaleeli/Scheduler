@@ -33,7 +33,6 @@ export default function Appointment(props) {
       interviewer
     };
     transition(SAVING);
-    console.log('interview', interview)
 
     props.bookInterview(props.id, interview)
     .then(()=>
@@ -50,8 +49,7 @@ export default function Appointment(props) {
     )
     .catch(error => transition(ERROR_DELETE, true))
   }
-  console.log('props.interview', props.interview)
-  console.log('MODE', mode)
+
   return (
     <article className="appointment" data-testid="appointment">
       <Header
